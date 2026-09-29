@@ -1,0 +1,27 @@
+.custom-stats-item {
+    display: inline-flex;
+    align-items: center;
+    list-style-type: none;
+    margin-left: 10px;
+    padding-left: 10px;
+    font-size: 12px;
+    color: #9aaa97; /* Matches Upwork's muted text color */
+}
+
+/* Adds a small dot separator before your custom stats */
+.custom-stats-item::before {
+    content: "•";
+    margin-right: 10px;
+    color: #9aaa97;
+}
+
+.stats-highlight {
+    color: #14a800; /* Upwork's primary brand green */
+    font-weight: 500;
+    margin-right: 4px;
+}
+
+.loading-text {
+    opacity: 0.6;
+    font-style: italic;
+}
