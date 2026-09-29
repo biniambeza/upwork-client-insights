@@ -1,20 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "Upwork Client Stats",
-  "version": "1.0",
-  "description": "Injects client hire rate and total jobs directly into the Upwork job feed.",
-  "permissions": [
-    "scripting"
-  ],
-  "host_permissions": [
-    "*://*.upwork.com/*"
-  ],
+  "name": "Upwork Client Insights",
+  "version": "1.0.0",
+  "description": "Adds client information to Upwork job cards.",
   "content_scripts": [
     {
-      "matches": ["*://*.upwork.com/nx/find-work/*", "*://*.upwork.com/nx/jobs/search/*"],
-      "js": ["content.js"],
-      "css": ["styles.css"],
+      "matches": [
+        "https://www.upwork.com/nx/find-work/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
       "run_at": "document_idle"
     }
-  ]
+  ],
+  "action": {
+    "default_title": "Upwork Client Insights"
+  }
 }
