@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Upwork Accelerator</title>
+    <style>
+        :root {
+            --primary: #108a00;
+            --primary-hover: #0e7700;
+            --bg: #ffffff;
+            --card-bg: #f8fafc;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 290px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+            padding: 16px;
+            user-select: none;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .brand-icon {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .brand-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .status-tag {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: #ecfdf5;
+            color: #065f46;
+        }
+
+        .status-tag.is-paused {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* Master Toggle Card */
+        .master-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-bg);
+            padding: 12px 14px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            margin-bottom: 14px;
+        }
+
+        .master-info h3 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .master-info p {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Modern Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #cbd5e1;
+            transition: .25s ease;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .25s ease;
+            border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(18px);
+        }
+
+        /* Option rows */
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 12px;
+            color: var(--text-main);
+            cursor: pointer;
+        }
+
+        .option-checkbox {
+            accent-color: var(--primary);
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+        }
+
+        /* Action Buttons */
+        .actions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 7px 10px;
+            font-size: 11.5px;
+            font-weight: 500;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: white;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: background 0.15s ease;
+        }
+
+        .btn:hover {
+            background: var(--card-bg);
+        }
+
+        /* Notice / Feedback */
+        .toast {
+            font-size: 11px;
+            text-align: center;
+            color: #065f46;
+            background: #ecfdf5;
+            padding: 6px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: none;
+        }
+
+        .toast.is-visible {
+            display: block;
+        }
+
+        .footer-note {
+            font-size: 11px;
+            line-height: 1.4;
+            color: var(--text-muted);
+            text-align: center;
+            padding-top: 6px;
+            border-top: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="brand">
+            <span class="brand-icon">⚡</span>
+            <span class="brand-title">Accelerator</span>
+        </div>
+        <span class="status-tag" id="statusBadge">Active</span>
+    </div>
+
+    <div class="master-card">
+        <div class="master-info">
+            <h3>Feed Insights</h3>
+            <p id="statusDescription">Smart client data is enabled</p>
+        </div>
+        <label class="switch">
+            <input type="checkbox" id="mainToggle" checked>
+            <span class="slider"></span>
+        </label>
+    </div>
+
+    <div class="options-list">
+        <label class="option-item">
+            <span>Auto-fetch hire rate on hover</span>
+            <input type="checkbox" id="autoFetchToggle" class="option-checkbox" checked>
+        </label>
+        <label class="option-item">
+            <span>Highlight card borders (Trust score)</span>
+            <input type="checkbox" id="highlightToggle" class="option-checkbox" checked>
+        </label>
+    </div>
+
+    <div class="toast" id="toastMessage">Settings saved</div>
+
+    <div class="actions">
+        <button class="btn" id="clearCacheBtn">Clear Cache</button>
+    </div>
+
+    <div class="footer-note">
+        Hover over any job card or open a job to view complete client hiring statistics.
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

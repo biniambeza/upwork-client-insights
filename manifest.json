@@ -1,23 +1,36 @@
 {
   "manifest_version": 3,
-  "name": "Upwork Client Insights",
-  "version": "1.0.0",
-  "description": "Adds client information to Upwork job cards.",
+  "name": "Upwork Accelerator - Client Insights",
+  "version": "1.1",
+  "description": "Smart in-feed client analytics, hire rates, and spending history for Upwork freelancers.",
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*.upwork.com/*"
+  ],
   "content_scripts": [
     {
       "matches": [
-        "https://www.upwork.com/nx/find-work/*"
+        "https://*.upwork.com/*"
       ],
-      "js": [
-        "content.js"
-      ],
-      "css": [
-        "styles.css"
-      ],
+      "js": ["content.js"],
+      "css": ["styles.css"],
       "run_at": "document_idle"
     }
   ],
   "action": {
-    "default_title": "Upwork Client Insights"
+    "default_popup": "popup.html",
+    "default_title": "Upwork Accelerator Settings",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   }
 }

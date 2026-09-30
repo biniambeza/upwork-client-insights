@@ -1,64 +1,203 @@
-.uci-client-insights {
-    margin-top: 12px;
-    padding: 12px 14px;
+/* ==========================================================================
+   Upwork Accelerator - Modern In-Feed Styling
+   ========================================================================== */
 
-    border: 1px solid #d5d9d5;
-    border-radius: 8px;
-
-    background: #f7f8f7;
-
-    font-family: Arial, sans-serif;
-
-    box-sizing: border-box;
-}
-
-.uci-title {
-    margin-bottom: 9px;
-
-    font-size: 13px;
-    font-weight: 700;
-
-    color: #001e00;
-}
-
-.uci-grid {
+/* Insights Row Container */
+.accelerator-insights-row {
     display: flex;
-
     flex-wrap: wrap;
-
-    gap: 7px;
-}
-
-.uci-item {
-    display: flex;
-
     align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+    padding: 2px 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
 
+/* Individual Pill Badges */
+.accelerator-badge {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
     gap: 5px;
+    padding: 3px 9px;
+    min-height: 22px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    cursor: default;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
 
-    padding: 5px 8px;
+.accelerator-badge.badge-interactive {
+    cursor: pointer;
+}
 
-    border-radius: 5px;
+.accelerator-badge.badge-interactive:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+}
 
-    background: white;
+/* Color Themes */
+.badge-green {
+    background-color: #ecfdf5 !important;
+    color: #065f46 !important;
+    border-color: #a7f3d0 !important;
+}
 
-    border: 1px solid #e1e4e1;
+.badge-amber {
+    background-color: #fffbeb !important;
+    color: #92400e !important;
+    border-color: #fde68a !important;
+}
 
+.badge-red {
+    background-color: #fef2f2 !important;
+    color: #991b1b !important;
+    border-color: #fecaca !important;
+}
+
+.badge-neutral {
+    background-color: #f8fafc !important;
+    color: #334155 !important;
+    border-color: #e2e8f0 !important;
+}
+
+/* Loading State */
+.accelerator-hire-loading {
+    background-color: #f1f5f9 !important;
+    color: #475569 !important;
+    border-color: #cbd5e1 !important;
+}
+
+.accelerator-hire-loading::before {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    border: 2px solid #64748b;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: acceleratorSpin 0.75s linear infinite;
+}
+
+@keyframes acceleratorSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* Tooltip on Hover */
+.accelerator-badge[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 7px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: #1e293b;
+    color: #f8fafc;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.35;
+    padding: 5px 9px;
+    border-radius: 6px;
+    white-space: normal;
+    width: max-content;
+    max-width: 220px;
+    pointer-events: none;
+    opacity: 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    z-index: 99999;
+}
+
+.accelerator-badge[data-tooltip]:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Card Accent Borders */
+.accelerator-border-green {
+    border-left: 4px solid #108a00 !important;
+    transition: border-color 0.2s ease;
+}
+
+.accelerator-border-red {
+    border-left: 4px solid #ef4444 !important;
+    transition: border-color 0.2s ease;
+}
+
+.accelerator-border-neutral {
+    border-left: 4px solid #94a3b8 !important;
+    transition: border-color 0.2s ease;
+}
+
+/* Floating Status Indicator Pill */
+.accelerator-floating-pill {
+    position: fixed;
+    top: 14px;
+    right: 18px;
+    z-index: 2147483640;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 999px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-size: 12px;
+    font-weight: 600;
+    color: #1e293b;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
 }
 
-.uci-label {
-    color: #676d67;
+.accelerator-floating-pill:hover {
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.14);
+    transform: translateY(-1px);
 }
 
-.uci-value {
-    color: #001e00;
+.accelerator-floating-pill.minimized .indicator-label {
+    display: none;
 }
 
-.uci-hire-rate {
-    color: #14a800;
+.accelerator-floating-pill.minimized {
+    padding: 8px;
 }
 
-.uci-jobs-posted {
-    color: #14a800;
+.indicator-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-active {
+    background-color: #108a00;
+    box-shadow: 0 0 0 0 rgba(16, 138, 0, 0.4);
+    animation: indicatorPulse 2s infinite;
+}
+
+.dot-paused {
+    background-color: #f59e0b;
+}
+
+@keyframes indicatorPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(16, 138, 0, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 6px rgba(16, 138, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(16, 138, 0, 0);
+    }
 }
